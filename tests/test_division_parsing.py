@@ -90,6 +90,13 @@ def test_bold_markdown_headers_strip_asterisks():
     assert "Use Redis" in s.recommendation
 
 
+def test_bold_markdown_header_strips_same_line_closing_marker():
+    """A bold header with same-line content does not leave its closing marker."""
+    s = parse_synthesis("**CONSENSUS:** All agree.", "Speaker")
+
+    assert s.consensus == "All agree."
+
+
 def test_sections_preserve_emphasis_and_trim_separator():
     """Only a standalone bold-header marker is removed from a section body."""
     raw = (

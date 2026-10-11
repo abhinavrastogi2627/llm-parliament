@@ -94,7 +94,7 @@ def parse_synthesis(raw: str, speaker_name: str) -> Synthesis:
             content = parts[i + 1].strip()
             # A bold header can leave its closing marker on a line of its own,
             # but stripping every edge asterisk would corrupt emphasized text.
-            content = re.sub(r"^\*\*\s*\n", "", content)
+            content = re.sub(r"^\*\*(?=\s)\s*", "", content)
             content = re.sub(r"\n?---\s*$", "", content).strip()
             if header in sections:
                 sections[header] = content
